@@ -1,27 +1,28 @@
-const btnSocket = document.getElementById('btnSocket')
+// const btnSocket = document.getElementById('btnSocket')
 
-const socket = io('http://localhost:3000');
+// const socket = io('http://localhost:3000');
 
-const ulMessageDataText = document.getElementById('ulMessageDataText')
+// const ulMessageDataText = document.getElementById('ulMessageDataText')
 
-btnSocket.addEventListener('click', () => {
-    socket.emit('message', {msg: 'Bonjour'})
-});
+// btnSocket.addEventListener('click', () => {
+//     socket.emit('message', {msg: 'Bonjour'})
+// });
 
-socket.on('sendFront', (data) => {
-    const li = document.createElement('li')
-    li.innerText = data.msg
+// socket.on('sendFront', (data) => {
+//     const li = document.createElement('li')
+//     li.innerText = data.msg
 
-    console.log(data)
-    ulMessageDataText.appendChild(li)
-})
+//     console.log(data)
+//     ulMessageDataText.appendChild(li)
+// })
 
 
 
 
 const btnSendMes = document.getElementById('submitMessage')
 
-const socketMessage = io('http://localhost:3000/api/chat/messages/');
+// const socketMessage = io('http://localhost:3000/api/chat/messages/');
+const socket = io('http://localhost:3000');
 
 const divMessages = document.getElementById('messages');
 
@@ -34,11 +35,11 @@ btnSendMes.addEventListener('click', () => {
     // })
 
     let inputValue = document.getElementById('insertMessage').value;
-    socketMessage.emit('message', {msgChat: `${inputValue}`})
+    socket.emit('message', {msgChat: `${inputValue}`})
     console.log(inputValue)
 });
 
-socketMessage.on('sendFront', (data) => {
+socket.on('sendFront', (data) => {
     const p = document.createElement('p')
     p.innerText = data.msgChat
 

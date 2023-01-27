@@ -9,14 +9,14 @@
 <body>
     <div id="tchat">
         <h2>Chat</h2>
-        <input type="text" placeholder="write your message" id="insertMessage">
-        <input type="submit" id="submitMessage">
+        <input type="text" placeholder="write your message" id="insertMessage" value="">
+        <button type="submit" id="submitMessage">Send</button>
 
-        <div id="messages"></div>
+        <ul id="messages"></ul>
     </div>
 
-    <button id="btnSocket">Test socket</button>
-    <ul id="ulMessageDataText"></ul>
+    <!-- <button id="btnSocket">Test socket</button>
+    <ul id="ulMessageDataText"></ul> -->
 
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
