@@ -1,29 +1,34 @@
 const express = require('express');
 const cors = require('cors');
+const cors = require('cors');
 const http = require('http');
+require('dotenv').config();
+const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
+const client = new MongoClient(process.env.MONGO_URL);
 
-const {Server} = require('socket.io')
+
+
+async function main(){
+    await client.connect();
+    console.log('CA SE CONNECTE')
+    const db = client.db('test') //création d'une database 'test'
+    const collection = db.collection('allo'); //on récupère les collections
+    const insertStuff = await collection.insertMany([{ a : 1},{ b : 2},{ c : 3}]) //apres avoir recup les collections on insere
+    console.log('documents insérés =>', insertStuff)
+    return 'slay';
+}
+
+main()
+.then(console.log)
+.catch(console.error)
+.finally(() => client.close());
+
 
 const app = express();
 const port = 3000;
 
-
-const httpServer = http.createServer(app)
-
-const io = new Server(httpServer, {
-    cors: {
-        origin: "*",
-    }
-});
-
-io.on('connection', (socket) => {
-    console.log(socket.id)
-    socket.on('message', (data) => {
-        console.log(data)
-        io.emit('sendFront', data)
-    })
-})
-
+const server = http.createServer(app)
 
 // middlewares
 app.use(express.json())
@@ -66,18 +71,6 @@ app.delete('/api/user', (req, res) => {
     res.send('user a été supprimé')
 })
 
-// app.delete('/api/user/:id', (req, res) => {
-//     const userId = req.params.id;
-//     Resource.findByIdAndRemove(userId, (err, resource) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         } else {
-//             res.send(`L'utilisateur ${userId} a été supprimé`);
-//         }
-//     });
-// });
-// Resource correspond à un modèle Mongoose prédéfinit auparavant
-
 
 // chat
 app.get('/api/chat/messages', (req, res) => {
@@ -101,19 +94,8 @@ app.delete('/api/chat/messages/:id', (req, res) => {
     res.send('Le message a été supprimé')
 })
 
-// app.delete('/api/chat/messages/:id', (req, res) => {
-//     const messageId = req.params.id;
-//     Resource.findByIdAndRemove(messageId, (err, resource) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         } else {
-//             res.send(`Le message ${messageId} a été supprimé`);
-//         }
-//     });
-// });
 
 
-
-httpServer.listen(port, () => {
+server.listen(port, () => {
     console.log(`tout est ok, on écoute sur le port ${port}`)
 })
