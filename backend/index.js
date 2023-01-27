@@ -2,10 +2,28 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 
+const {Server} = require('socket.io')
+
 const app = express();
 const port = 3000;
 
-const server = http.createServer(app)
+
+const httpServer = http.createServer(app)
+
+const io = new Server(httpServer, {
+    cors: {
+        origin: "*",
+    }
+});
+
+io.on('connection', (socket) => {
+    console.log(socket.id)
+    socket.on('message', (data) => {
+        console.log(data)
+        io.emit('sendFront', data)
+    })
+})
+
 
 // middlewares
 app.use(express.json())
@@ -48,6 +66,18 @@ app.delete('/api/user', (req, res) => {
     res.send('user a été supprimé')
 })
 
+// app.delete('/api/user/:id', (req, res) => {
+//     const userId = req.params.id;
+//     Resource.findByIdAndRemove(userId, (err, resource) => {
+//         if (err) {
+//             res.status(500).send(err);
+//         } else {
+//             res.send(`L'utilisateur ${userId} a été supprimé`);
+//         }
+//     });
+// });
+// Resource correspond à un modèle Mongoose prédéfinit auparavant
+
 
 // chat
 app.get('/api/chat/messages', (req, res) => {
@@ -71,8 +101,19 @@ app.delete('/api/chat/messages/:id', (req, res) => {
     res.send('Le message a été supprimé')
 })
 
+// app.delete('/api/chat/messages/:id', (req, res) => {
+//     const messageId = req.params.id;
+//     Resource.findByIdAndRemove(messageId, (err, resource) => {
+//         if (err) {
+//             res.status(500).send(err);
+//         } else {
+//             res.send(`Le message ${messageId} a été supprimé`);
+//         }
+//     });
+// });
 
 
-server.listen(port, () => {
+
+httpServer.listen(port, () => {
     console.log(`tout est ok, on écoute sur le port ${port}`)
 })

@@ -7,6 +7,19 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="tchat">
+        <h2>Chat</h2>
+        <input type="text" placeholder="write your message" id="insertMessage">
+        <input type="submit" id="submitMessage">
+
+        <div id="messages"></div>
+    </div>
+
+    <button id="btnSocket">Test socket</button>
+    <ul id="ulMessageDataText"></ul>
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
+    <script src="frontend.js"></script>
 </body>
 </html>
