@@ -1,0 +1,15 @@
+body {
+  background-color: plum;
+}
+body #tchat {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 500px;
+  gap: 10px;
+}
+body #tchat .chat {
+  width: 400px;
+  height: 700px;
+  background-color: aliceblue;
+}/*# sourceMappingURL=style.css.map */
