@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const bodyParser = require('body-parser');
-const { MongoClient } = require('mongodb');
+/* const { MongoClient } = require('mongodb'); */
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', true)
 /* require('dotenv').config();
@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 
 import userRt from "./routes/user.js"
 
-app.use("/api/user", userRt);
+
 
 const httpServer = http.createServer(app)
 
@@ -96,6 +96,7 @@ app.delete('/api/chat/messages/:id', (req, res) => {
     res.send('Le message a été supprimé')
 })
 
+app.use("/api/user", userRt);
 
 httpServer.listen(port, () => {
     console.log(`tout est ok, on écoute sur le port ${port}`)
