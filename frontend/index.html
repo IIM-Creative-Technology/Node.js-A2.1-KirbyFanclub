@@ -12,23 +12,24 @@
     <section class="interface">
 
         <div id="tchat">
-
             <h2>Chat</h2>
             <input type="text" placeholder="write your message" id="insertMessage" value="">
             <button type="submit" id="submitMessage">Envoyer</button>
             <div id="messages"></div>
 
             <input type="text" id="guess">
-            <button onclick="guessRiddle()">Deviner</button>
+            <button onclick="guessRiddle()" id="pet">Deviner</button>
             <p id="result"></p>
         </div>
     
         <div id="jeu">
-
+            <div class="updates">
+                <button class="connect"><a href="connexion.html">connexion</a></button>
+                <button class="inscription"><a href="inscription.html">inscription</a></button>
+            </div>
             <input type="text" id="questions" readonly>
             <button id="rep">Envoyer question </button>
         </div>
-
 
     </section>
 
