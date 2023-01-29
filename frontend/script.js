@@ -11,6 +11,18 @@ btnSendMes.addEventListener('click', () => {
     let inputValue = document.getElementById('insertMessage').value;
     socket.emit('message', {msgChat: `${inputValue}`})
     console.log(inputValue)
+    fetch('/api/data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: 'some data to send to the server'
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log('Data received from the server:', data))
+      .catch(error => console.error(error))
 });
 
 socket.on('sendFront', (data) => {
@@ -42,19 +54,6 @@ const questions = [
 
     const randomRiddle = getRandomRiddle();
     questions_display.value = randomRiddle.question;
-
-    fetch('/api/data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        data: 'some data to send to the server'
-      })
-    })
-      .then(res => res.json())
-      .then(data => console.log('Data received from the server:', data))
-      .catch(error => console.error(error))
     
 
   });
