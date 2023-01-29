@@ -15,7 +15,7 @@ const port = 3000;
 app.use(bodyParser.json())
 
 
-import userRt from "./routes/user.js"
+/* import userRt from "./routes/user.js" */
 
 
 
@@ -96,7 +96,7 @@ app.delete('/api/chat/messages/:id', (req, res) => {
     res.send('Le message a été supprimé')
 })
 
-app.use("/api/user", userRt);
+/* app.use("/api/user", userRt); */
 
 httpServer.listen(port, () => {
     console.log(`tout est ok, on écoute sur le port ${port}`)
