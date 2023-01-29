@@ -4,6 +4,15 @@ const socket = io('http://localhost:3000');
 
 const divMessages = document.getElementById('messages');
 
+const questions = [
+  { question: "Quel est l'animal qui a le plus de pattes?", answer: "Un escargot, il a huit pattes." },
+  { question: "Quelles sont les deux choses qui n'ont pas de fin?", answer: "L'univers et la stupidité humaine." },
+  { question: "Quelles sont les deux choses qui viennent toujours en paire?", answer: "Les jambes d'un fauteuil." }
+  // Ajoutez autant de devinettes que vous le souhaitez
+];
+
+const random_questions = Math.floor(Math.random() * questions.length);
+
 
 // CHAT
 
@@ -21,15 +30,21 @@ socket.on('sendFront', (data) => {
     divMessages.appendChild(p)
 })
 
-// JEU 
+// JEU
 
-const questions = [
-    { question: "Quel est l'animal qui a le plus de pattes?", answer: "Un escargot, il a huit pattes." },
-    { question: "Quelles sont les deux choses qui n'ont pas de fin?", answer: "L'univers et la stupidité humaine." },
-    { question: "Quelles sont les deux choses qui viennent toujours en paire?", answer: "Les jambes d'un fauteuil." }
-    // Ajoutez autant de devinettes que vous le souhaitez
-  ];
-  
+
+    function guessRiddle() {
+      const guess = parseInt(document.getElementById("guess").value);
+
+      if (guess === random_questions) {
+        document.getElementById("result").innerHTML = "Félicitations, vous avez trouvé le bon nombre !";
+      } else {
+        document.getElementById("result").innerHTML = "Désolé, ce n'est pas la bonne réponse. Essayez encore.";
+      }
+    }
+
+// QUESTIONS
+
   function getRandomRiddle() {
     const randomIndex = Math.floor(Math.random() * questions.length);
     return questions[randomIndex];
