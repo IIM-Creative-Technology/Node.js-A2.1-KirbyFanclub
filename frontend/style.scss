@@ -1,10 +1,13 @@
 body{
-    background-color: rgb(244, 185, 244);
-    cursor: url("/frontend/images/pngegg\ \(1\).png"), auto;
+    height: auto;
+    background: linear-gradient(to right, #f8b195, #f67280);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     form {
         width: 250px;
         margin: 0 auto;
-        background-color: #00bfff;
+        background-color: rgb(253, 215, 221);
         border-radius: 20px;
         padding: 6%;
         label {
@@ -37,7 +40,7 @@ body{
         display: flex;
         flex-direction: row;
         gap: 10px;
-        margin-top: 10vh;
+        margin-top: 5vh;
         #tchat{
             display: flex;
             flex-direction: column;
@@ -104,13 +107,12 @@ body{
             }
         }
         #jeu{
-
             display: flex;
             flex-flow: column;
             justify-content: center;
             align-items: center;
             gap: 30px;
-            width: 70vw;
+            width: 60vw;
             height: 70vh;
             border: rgb(252, 183, 193);
             border-radius: 15px;
@@ -124,7 +126,19 @@ body{
                 border: 2px solid #00bfff;
                 outline: none;
             }
-            .udates{
+            #rep{
+                background-color: #00bfff;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 25px;
+                border: 2px solid #00bfff;
+                font-size: 18px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                margin-bottom: 10px;
+
+            }
+            #udates{
                     .connect{
                         background-color: #00bfff;
                         color: #fff;
