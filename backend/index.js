@@ -2,10 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const bodyParser = require('body-parser');
+const { MongoClient } = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', true)
 /* require('dotenv').config();
-const { MongoClient } = require('mongodb');
 const client = new MongoClient(process.env.MONGO_URL); */
 const {Server} = require('socket.io')
 
@@ -15,7 +15,6 @@ const port = 3000;
 app.use(bodyParser.json())
 
 import userRoute from "./routes/user.js"
-
 
 const httpServer = http.createServer(app)
 
@@ -41,6 +40,14 @@ const userSchema = {
     isVerified: Boolean,
   }
 
+  const Sara = new User ({
+    name: "Sara",
+    mail: "hsaradel@gmail.com",
+    password: "aaaassd",
+    isAdmin: true,
+    isVerified: true,
+  })
+
 const User =  mongoose.model('User', userSchema)
 /* async function main(){
     await client.connect();
@@ -64,19 +71,6 @@ const server = http.createServer(app)
 app.use(express.json())
 app.use(cors())
 
-// app.delete('/api/user/:id', (req, res) => {
-//     const userId = req.params.id;
-//     Resource.findByIdAndRemove(userId, (err, resource) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         } else {
-//             res.send(`L'utilisateur ${userId} a été supprimé`);
-//         }
-//     });
-// });
-// Resource correspond à un modèle Mongoose prédéfinit auparavant
-
-
 // chat
 app.get('/api/chat/messages', (req, res) => {
     console.log(req.params)
@@ -98,18 +92,6 @@ app.post('/api/chat/messages', (req, res) => {
 app.delete('/api/chat/messages/:id', (req, res) => {
     res.send('Le message a été supprimé')
 })
-
-// app.delete('/api/chat/messages/:id', (req, res) => {
-//     const messageId = req.params.id;
-//     Resource.findByIdAndRemove(messageId, (err, resource) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         } else {
-//             res.send(`Le message ${messageId} a été supprimé`);
-//         }
-//     });
-// });
-
 
 
 httpServer.listen(port, () => {

@@ -47,7 +47,7 @@ app.post('/', (req,res) => {
     }) 
 })
 
-let isConnected = 0
+let loged = 0
 // Login avec pseudo + mdp dans l'url
 app.get('/api/:pseudo/:password', (req,res) => {
     User.find({ name:req.params.name ,password:req.params.password}).then(function(users){
@@ -55,7 +55,6 @@ app.get('/api/:pseudo/:password', (req,res) => {
     })
 })
 
-let loged = 0
 // inscription 
 app.post('/api/user/signup', (req, res) => {
     User.find({ pseudo:req.params.name ,password:req.params.password}).then(function(users){
