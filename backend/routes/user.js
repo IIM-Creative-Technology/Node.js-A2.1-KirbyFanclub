@@ -48,7 +48,7 @@ app.post('/', (req,res) => {
 })
 
 let loged = 0
-// Login avec pseudo + mdp dans l'url
+// Login avec pseudo +password
 app.get('/api/:pseudo/:password', (req,res) => {
     User.find({ name:req.params.name ,password:req.params.password}).then(function(users){
         res.send(users);
@@ -64,7 +64,6 @@ app.post('/api/user/signup', (req, res) => {
     res.json(req.body)
 })
 
-
 // login
 app.post('/api/user/login', (req, res) => {
     User.find({ pseudo:req.body.nameSignUp ,password:req.body.passwordSignUp}).then(function(users){
@@ -77,12 +76,6 @@ app.post('/api/user/login', (req, res) => {
 app.get('/api/user/logout', (req, res) => {
     res.json({connection:loged})
     loged = 0
-})
-
-// réinitialisation du mdp
-app.post('/api/user/forget', (req, res) => {
-    console.log(req.body)
-    res.json(req.body)
 })
 
 // suppression du user
