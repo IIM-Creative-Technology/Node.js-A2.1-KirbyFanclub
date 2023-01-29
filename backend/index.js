@@ -4,6 +4,7 @@ const app = express();
 const {Server} = require('socket.io');
 const http = require('http');
 const cors = require('cors');
+// const { default: mongoose } = require('mongoose');
 const httpServer = http.createServer(app);
 const port = 3000
 const io = new Server(httpServer, {
@@ -31,47 +32,58 @@ httpServer.listen(port, () =>{
     console.log(`On écoute sur le port ${port}`)
 })
 
+///
+
+app.post('/todos', async (req, res, next) => {
+    const user = new User(req.body);
+    const saveUser = await user.save();
+    res.send(saveUser);
+})
+
 ////mongodb
 
 require('dotenv').config();
 const mongoose = require('mongoose');
-const { MongoClient } = require('mongodb');
-const client = new MongoClient(process.env.MONGO_URL);
+const validator = require('validator');
+const { connectDatabase } = require('./src/services/mongoose');
+const User = require('./src/models/user');
 
 
+connectDatabase().catch(err => console.log(err));
 
-async function main(){
-    await client.connect();
-    console.log('CA SE CONNECTE')
-    const db = client.db('test') //création d'une database 'test'
-    const collection = db.collection('testing_table'); //on récupère les collections
+// async function main(){
+//     await mongoose.connect(process.env.MONGO_URL)
 
+//     const User = mongoose.model('User', {
+//         pseudo: {
+//             type : String,
+//             required : true,
+//             validate (v){
+//                 if (!validator.isLength(v,{ min:3, max:20})) throw new Error('Le pseudo doit être entre 3 et 20 caracteres');
+//             }
+//         },
 
+//         password :{
+//             type: String,
+//             required : true,
+//             validate (v){
+//                 if (!validator.isLength(v,{ min:5, max:20})) throw new Error('Le mot de passe doit être entre 5 et 20 caracteres');
+//             }
+//         }
+//     });
 
-    //create
-    try{
-        const insertData = await collection.insertMany([
-            {
-                name : 'hl',
-                age :22,
-            },
-            {
-                name : 'slay',
-                age :22,
-            }
-        ]);
-    } 
-    catch(e){throw e;}
+//     const firstPerson = new User({
+//         pseudo:"kishi",
+//         password:'alalajod'
+//     })
+//     const secondPerson = new User({
+//         pseudo:"lyndab",
+//         password:'azaaada'
+//     })
 
-    ///
+//     const firstSave = await firstPerson.save();
+//     const secondSave = await secondPerson.save();
 
-    try{
-        const findData = await collection.find({age : 22});
-        console.log(await findData.toArray());
-    }catch(e) {throw e;}
-}
+//     console.log(firstSave,secondSave)
+// }
 
-main()
-// .then(console.log)
-.catch(console.error)
-.finally(() => client.close());
