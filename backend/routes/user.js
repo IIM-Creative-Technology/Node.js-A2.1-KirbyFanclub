@@ -75,7 +75,7 @@ app.post('/api/user/login', (req, res) => {
 
 // déconnexion
 app.get('/api/user/logout', (req, res) => {
-    res.json({connection:isConnected})
+    res.json({connection:loged})
     loged = 0
 })
 
@@ -88,11 +88,11 @@ app.post('/api/user/forget', (req, res) => {
 // suppression du user
 app.delete('/api/user', (req, res) => {
     console.log(req.body.id)
-  isConnected = 1
+    loged = 1
   User.findOneAndDelete({_id:req.body.id}).then(function (){
     res.json({
       msg: 'Got a DELETE request at /',
-      connection: isConnected
+      connection: loged
     })
   })
 })
