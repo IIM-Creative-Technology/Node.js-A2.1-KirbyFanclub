@@ -1,16 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
-require('dotenv').config();
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', true)
+/* require('dotenv').config();
 const { MongoClient } = require('mongodb');
-const client = new MongoClient(process.env.MONGO_URL);
-
-
+const client = new MongoClient(process.env.MONGO_URL); */
 const {Server} = require('socket.io')
 
 const app = express();
 const port = 3000;
+
+import userRoute from "./routes/users.js"
 
 
 const httpServer = http.createServer(app)
@@ -29,7 +31,16 @@ io.on('connection', (socket) => {
     })
 })
 
-async function main(){
+const userSchema = {
+    pseudo: String,
+    mail: String,
+    password: String,
+    isAdmin: Boolean,
+    isVerified: Boolean,
+  }
+
+const User =  mongoose.model('User', userSchema)
+/* async function main(){
     await client.connect();
     console.log('CA SE CONNECTE')
     const db = client.db('test') //création d'une database 'test'
@@ -43,50 +54,13 @@ main()
 .then(console.log)
 .catch(console.error)
 .finally(() => client.close());
-
+ */
 const server = http.createServer(app)
 
 
 // middlewares
 app.use(express.json())
 app.use(cors())
-
-
-// ------ routes ------
-// user
-app.get('/api/user', (req, res) => {
-    console.log(req.params)
-    res.json('{msg: info user}')
-})
-
-// inscription 
-app.post('/api/user/signup', (req, res) => {
-    console.log(req.body)
-    res.json(req.body)
-})
-
-// login
-app.post('/api/user/login', (req, res) => {
-    console.log(req.body)
-    res.json(req.body)
-})
-
-// déconnexion
-app.get('/api/user/logout', (req, res) => {
-    console.log(req.params)
-    res.json('{msg: deconnexion du user}')
-})
-
-// réinitialisation du mdp
-app.post('/api/user/forget', (req, res) => {
-    console.log(req.body)
-    res.json(req.body)
-})
-
-// suppression du user
-app.delete('/api/user', (req, res) => {
-    res.send('user a été supprimé')
-})
 
 // app.delete('/api/user/:id', (req, res) => {
 //     const userId = req.params.id;
