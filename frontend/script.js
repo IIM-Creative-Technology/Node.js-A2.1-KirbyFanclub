@@ -13,7 +13,7 @@ btnSendMes.addEventListener('click', () => {
     let inputValue = document.getElementById('insertMessage').value;
     socket.emit('message', {msgChat: `${inputValue}`})
     console.log(inputValue)
-   
+
 });
 
 socket.on('sendFront', (data) => {
@@ -50,18 +50,63 @@ const questions = [
   });
 
   // FORM
-  
-  fetch('/api/data', {
+
+// const mongoose= require('mongoose')
+
+// const schema = new mongoose.Schema({
+//   pseudo: String,
+//   password: String
+// });
+
+
+// const FormData = mongoose.model('FormData', schema);
+
+// app.post('/submit', (req,res)=>{
+//   const theDataForm = new FormData({
+//     pseudo: req.body.pseudo,
+//     password: req.body.password
+//   });
+
+//   theDataForm.save((err, theDataForm) => {
+//     if (err) return console.error(err);
+//     console.log('Form data saved to MongoDB:', theDataForm);
+//     res.send('Form data saved to MongoDB');
+//   });
+// })
+
+// 
+
+// const buttonSignUp = document.querySelector('#submitSignUp');
+// buttonSignUp.addEventListener('click', ()=>{
+//     fetch("http://localhost:3000/",{
+//         method:"POST",
+//         headers:{
+//             'Content-Type' : 'application/json'
+//         },
+//         body:JSON.stringify({
+//             pseudo:'',
+//             password:''
+//         })
+//     })
+// })
+
+
+const form = document.getElementById('signupForm');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const pseudo = document.getElementById('pseudo').value;
+  const password = document.getElementById('password').value;
+
+  fetch('http://localhost:3000/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      data: 'some data to send to the server'
-    })
+    body: JSON.stringify({ pseudo, password })
   })
-    .then(res => res.json())
-    .then(data => console.log('Data received from the server:', data))
-    .catch(error => console.error(error))
-  
-  
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+});
