@@ -12,7 +12,9 @@ const {Server} = require('socket.io')
 const app = express();
 const port = 3000;
 
-import userRoute from "./routes/users.js"
+app.use(bodyParser.json())
+
+import userRoute from "./routes/user.js"
 
 
 const httpServer = http.createServer(app)

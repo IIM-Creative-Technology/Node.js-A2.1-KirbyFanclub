@@ -42,14 +42,14 @@ app.post('/', (req,res) => {
     res.send(user)
     res.json({
         pseudo: req.body.pseudo,
-        lpassword: req.body.password,
+        password: req.body.password,
         email: req.body.email
     }) 
 })
 
 let isConnected = 0
 // Login avec pseudo + mdp dans l'url
-app.get('/:pseudo/:password', (req,res) => {
+app.get('/api/:pseudo/:password', (req,res) => {
     User.find({ name:req.params.name ,password:req.params.password}).then(function(users){
         res.send(users);
     })
