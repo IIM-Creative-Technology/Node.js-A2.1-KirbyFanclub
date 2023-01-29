@@ -1,5 +1,6 @@
 const btnSendMes = document.getElementById('submitMessage')
-const btn = document.getElementById("btnFetch")
+const submitBtn = document.getElementById('submitBt')
+const submitSignUp = document.getElementById('submitSignUp')
 
 // const socketMessage = io('http://localhost:3000/api/chat/messages/');
 const socket = io('http://localhost:3000');
