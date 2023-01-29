@@ -25,21 +25,21 @@ router.get('/users/:id', async(req,res,next) =>{
     }
 })
 
-router.patch('/users/:id', async(req,res,next) =>{
-    const userId = req.params.id;
+// router.patch('/users/:id', async(req,res,next) =>{
+//     const userId = req.params.id;
 
-    try{
-        const user = await User.findByIdAndUpdate(userId, req.body,{
-            new:true,
-            runValidators:true
-        });
+//     try{
+//         const user = await User.findByIdAndUpdate(userId, req.body,{
+//             new:true,
+//             runValidators:true
+//         });
 
-        if(!user) return res.status(404).send('User not found')
-        res.send(user)
-    }catch(e){
-        res.status(500).send(e);
-    }
-})
+//         if(!user) return res.status(404).send('User not found')
+//         res.send(user)
+//     }catch(e){
+//         res.status(500).send(e);
+//     }
+// })
 
 router.delete('/users/:id', async(req,res,next) =>{
     const userId = req.params.id;
