@@ -14,7 +14,10 @@ const port = 3000;
 
 app.use(bodyParser.json())
 
-import userRoute from "./routes/user.js"
+
+import userRt from "./routes/user.js"
+
+app.use("/api/user", userRt);
 
 const httpServer = http.createServer(app)
 
