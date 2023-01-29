@@ -5,18 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <title>KishiniLand</title>
 </head>
 <body>
 
     <section class="interface">
 
         <div id="tchat">
-
             <h2>Chat</h2>
             <input type="text" placeholder="write your message" id="insertMessage" value="">
             <button type="submit" id="submitMessage">Envoyer</button>
             <div id="messages"></div>
+
+            <input type="text" id="guess">
+            <button onclick="guessRiddle()" id="pet">Deviner</button>
+            <p id="result"></p>
         </div>
     
         <div id="jeu">
@@ -24,18 +27,14 @@
                 <button class="connect"><a href="login.html">connexion</a></button>
                 <button class="inscription"><a href="signup.html">inscription</a></button>
             </div>
-
-         <a href="interface.html"> <button id="rep"> On commence ! </button></a>   
-            <input type="text" id="questions" readonly>
-            <button id="rep">Envoyer question </button>
     
+                <input type="text" id="questions" readonly>
+            <button id="rep">Envoyer question </button>
         </div>
-
 
     </section>
 
-      
-    <!-- <button id="btnSocket">Test socket</button>
+   <!-- <button id="btnSocket">Test socket</button>
     <ul id="ulMessageDataText"></ul> -->
 
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
