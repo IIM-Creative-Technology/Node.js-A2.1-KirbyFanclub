@@ -1,8 +1,37 @@
+// Creation du Serveur
 const express = require('express');
-const cors = require('cors');
+const app = express();
+const {Server} = require('socket.io');
 const http = require('http');
+const cors = require('cors');
+const httpServer = http.createServer(app);
+const port = 3000
+const io = new Server(httpServer, {
+    cors: {
+        origin : "*",
+    }
+})
 
-const {Server} = require('socket.io')
+// Initialisation
+app.use(express.json())
+app.use(cors())
+
+// Socket (requètes des messages)
+io.on('connection', (socket) =>{
+    socket.on('message', (data) =>{
+        io.emit('sendFront', data)
+        console.log(data)
+    })
+})
+
+
+// ecoute du port
+
+httpServer.listen(port, () =>{
+    console.log(`On écoute sur le port ${port}`)
+})
+
+////mongodb
 
 require('dotenv').config();
 const mongoose = require('mongoose');
@@ -25,9 +54,3 @@ main()
 .then(console.log)
 .catch(console.error)
 .finally(() => client.close());
-
-
-const app = express();
-const port = 3000;
-
-const cors= require('cors');
