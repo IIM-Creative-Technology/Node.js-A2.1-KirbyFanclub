@@ -4,22 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>KishiniLand</title>
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
 </head>
 <body>
-    <div id="tchat">
-        <h1> Hey , wanna play ?</h1>
-        <a href="inscription.html">let's start</a>
-        <a href="connexion.html">already have an account</a>
-        <h2>Chat</h2>
-        <div class="chat" placeholder="chat">
-            <ul id="messages"></ul>
-        </div>
-        <input type="text" placeholder="write your message" id="insertMessage" value="">
-        <button type="submit" id="submitMessage">Send</button>
-    </div>
 
+    <section class="interface">
+
+        <div id="tchat">
+
+            <h2>Chat</h2>
+            <input type="text" placeholder="write your message" id="insertMessage" value="">
+            <button type="submit" id="submitMessage">Envoyer</button>
+            <div id="messages"></div>
+
+            <input type="text" id="guess">
+            <button onclick="guessRiddle()">Deviner</button>
+            <p id="result"></p>
+        </div>
+    
+        <div id="jeu">
+
+            <input type="text" id="questions" readonly>
+            <button id="rep">Envoyer question </button>
+    
+        </div>
+
+
+    </section>
+
+      
     <!-- <button id="btnSocket">Test socket</button>
     <ul id="ulMessageDataText"></ul> -->
 
