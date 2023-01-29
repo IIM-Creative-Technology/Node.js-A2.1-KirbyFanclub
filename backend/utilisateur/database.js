@@ -20,3 +20,29 @@
 
 
 // mongoose.connect()
+
+const userSchema = new mongoose.Schema({
+    email: String,
+    pseudo: String,
+    password: String
+  });
+  const User = mongoose.model('User', userSchema);
+
+  const registerUser = (user, callback) => {
+    const newUser = new User(user);
+    newUser.save((error) => {
+      if (error) {
+        return callback(error);
+      }
+      return callback(null, newUser);
+    });
+  };
+
+  app.post('/register', (req, res) => {
+    registerUser(req.body, (error, user) => {
+      if (error) {
+        return res.status(400).json({error});
+      }
+      return res.json({user});
+    });
+  });
