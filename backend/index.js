@@ -19,7 +19,7 @@ app.use(cors())
 // Socket (requètes des messages)
 io.on('connection', (socket) =>{
     socket.on('message', (data) =>{
-        socket.emit('sendFront', data)
+        io.emit('sendFront', data)
         console.log(data)
     })
 })
