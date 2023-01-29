@@ -44,13 +44,34 @@ async function main(){
     await client.connect();
     console.log('CA SE CONNECTE')
     const db = client.db('test') //création d'une database 'test'
-    const collection = db.collection('allo'); //on récupère les collections
-    const insertStuff = await collection.insertMany([{ a : 1},{ b : 2},{ c : 3}]) //apres avoir recup les collections on insere
-    console.log('documents insérés =>', insertStuff)
-    return 'slay';
+    const collection = db.collection('testing_table'); //on récupère les collections
+
+
+
+    //create
+    try{
+        const insertData = await collection.insertMany([
+            {
+                name : 'hl',
+                age :22,
+            },
+            {
+                name : 'slay',
+                age :22,
+            }
+        ]);
+    } 
+    catch(e){throw e;}
+
+    ///
+
+    try{
+        const findData = await collection.find({age : 22});
+        console.log(await findData.toArray());
+    }catch(e) {throw e;}
 }
 
 main()
-.then(console.log)
+// .then(console.log)
 .catch(console.error)
 .finally(() => client.close());
